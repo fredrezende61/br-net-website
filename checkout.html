@@ -3,297 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Velozes Internet | Internet Rápida e Estável</title>
-  <meta name="description" content="Velozes Internet oferece internet de alta velocidade, estabilidade e suporte especializado para residências e empresas em Juiz de Fora e região." />
+  <title>Checkout - Velozes Internet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
-<body>
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="container nav-wrap">
-        <a href="#inicio" class="brand" aria-label="Velozes Internet">
-          <div class="brand-mark">
-            <span class="brand-dot"></span>
-          </div>
-          <div class="brand-text">
-            <span class="brand-main">Velozes</span>
-            <span class="brand-sub">Internet</span>
-          </div>
-        </a>
-
-        <nav class="main-nav" aria-label="Menu principal">
-          <a href="#inicio">Home</a>
-          <a href="#planos">Planos</a>
-          <a href="#quem-somos">Quem Somos</a>
-          <a href="#contato">Contato</a>
-        </nav>
-
-        <a href="checkout.html?plan=500" class="nav-cta">Central do Cliente</a>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero" id="inicio">
-        <div class="container hero-layout">
-          <div class="hero-copy">
-            <h1>
-              Sua <span>vida</span><br />
-              sem <span class="highlight">trav</span>as
-            </h1>
-
-            <p>
-              Internet ultrarrápida para trabalhar, estudar e se divertir com segurança,
-              estabilidade e suporte humano.
-            </p>
-
-            <div class="hero-benefits">
-              <div class="benefit-badge">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Internet<br />ultrarrápida</span>
-              </div>
-              <div class="benefit-badge">
-                <i class="fas fa-wifi"></i>
-                <span>Conexão<br />estável</span>
-              </div>
-              <div class="benefit-badge">
-                <i class="fas fa-shield-alt"></i>
-                <span>Segurança<br />e confiança</span>
-              </div>
-              <div class="benefit-badge">
-                <i class="fas fa-headset"></i>
-                <span>Suporte<br />humano</span>
-              </div>
-            </div>
-
-            <div class="hero-actions">
-              <a href="#planos" class="primary-btn">Ver planos de internet</a>
-            </div>
-          </div>
-
-          <div class="hero-visual" aria-hidden="true">
-            <div class="screen-card">
-              <div class="screen-top">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="screen-body">
-                <div class="chart-bars">
-                  <span style="height: 34%"></span>
-                  <span style="height: 52%"></span>
-                  <span style="height: 46%"></span>
-                  <span style="height: 72%"></span>
-                  <span style="height: 58%"></span>
-                  <span style="height: 84%"></span>
-                </div>
-              </div>
-            </div>
-            <div class="man-silhouette"></div>
-          </div>
+<body class="checkout-page">
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><div class="brand-mark"><span class="brand-dot"></span></div><div class="brand-text"><span class="brand-main">Velozes</span><span class="brand-sub">Internet</span></div></a>
+      <nav class="main-nav"><a href="index.html">Voltar</a></nav>
+    </div>
+  </header>
+  <main class="checkout-main">
+    <div class="container checkout-wrap">
+      <aside class="checkout-summary">
+        <h2>Resumo do plano</h2>
+        <div class="summary-card">
+          <div class="summary-row"><span>Plano</span><strong id="plan-name">500 Mega</strong></div>
+          <div class="summary-row"><span>Velocidade</span><strong id="plan-speed">500 Mbps</strong></div>
+          <div class="summary-row"><span>Valor mensal</span><strong id="plan-price">R$ 99,99</strong></div>
+          <div class="summary-divider"></div>
+          <div class="summary-total"><span>Total</span><strong id="plan-total">R$ 99,99</strong></div>
         </div>
+      </aside>
+      <section class="checkout-form-box">
+        <h1>Finalizar Assinatura</h1>
+        <form id="payment-form">
+          <div class="form-section"><h3>Dados pessoais</h3><div class="field-group"><label for="name">Nome completo</label><input type="text" id="name" name="name" placeholder="Seu nome" required /></div><div class="field-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="seu@email.com" required /></div><div class="field-group"><label for="phone">Telefone</label><input type="tel" id="phone" name="phone" placeholder="(32) 99999-9999" required /></div></div>
+          <div class="form-section"><h3>Endereço</h3><div class="field-group"><label for="address">Rua</label><input type="text" id="address" name="address" placeholder="Av. dos Andradas" required /></div><div class="row-fields"><div class="field-group"><label for="number">Número</label><input type="text" id="number" name="number" placeholder="340" required /></div><div class="field-group"><label for="city">Cidade</label><input type="text" id="city" name="city" placeholder="Juiz de Fora" required /></div></div><div class="row-fields"><div class="field-group"><label for="state">Estado</label><input type="text" id="state" name="state" placeholder="MG" required /></div><div class="field-group"><label for="cep">CEP</label><input type="text" id="cep" name="cep" placeholder="36036-000" required /></div></div></div>
+          <div class="form-section"><h3>Pagamento</h3><div class="field-group"><label>Dados do cartão</label><div id="card-element" class="stripe-card"></div><div id="card-errors" class="card-errors"></div></div></div>
+          <label class="checkbox-wrap"><input type="checkbox" required /><span>Concordo com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</span></label>
+          <button type="submit" class="submit-btn">Confirmar pagamento</button>
+        </form>
       </section>
-
-      <section class="feature-strip">
-        <div class="container feature-grid">
-          <article class="feature-card">
-            <div class="icon-wrap"><i class="fas fa-user-cog"></i></div>
-            <h3>Suporte humanizado</h3>
-          </article>
-          <article class="feature-card">
-            <div class="icon-wrap"><i class="fas fa-check-circle"></i></div>
-            <h3>+20 anos de experiência</h3>
-          </article>
-          <article class="feature-card">
-            <div class="icon-wrap"><i class="fas fa-tools"></i></div>
-            <h3>Técnicos próprios e capacitados</h3>
-          </article>
-          <article class="feature-card">
-            <div class="icon-wrap"><i class="fas fa-wrench"></i></div>
-            <h3>Visita técnica 7 dias por semana</h3>
-          </article>
-        </div>
-      </section>
-
-      <section class="pricing-section" id="planos">
-        <div class="container">
-          <div class="section-switcher">
-            <button class="tab active" type="button">Planos</button>
-            <button class="tab" type="button">Monitoramento</button>
-          </div>
-
-          <div class="plan-option-list">
-            <button class="plan-option active" type="button">500 Mega</button>
-            <button class="plan-option" type="button">700 Mega</button>
-            <button class="plan-option" type="button">1 Giga</button>
-          </div>
-
-          <div class="plan-row">
-            <article class="price-card active-card" data-plan="500">
-              <div class="card-top">
-                <i class="fas fa-network-wired"></i>
-                <h3>500 Mega</h3>
-              </div>
-              <div class="card-body">
-                <div class="speed-label">500 Mega</div>
-                <div class="price-line">
-                  <span class="currency">R$</span>
-                  <span class="value">99,99</span>
-                  <span class="period">/mês</span>
-                </div>
-              </div>
-              <ul class="plan-features">
-                <li><i class="fas fa-check"></i> WiFi Plus</li>
-                <li><i class="fas fa-check"></i> Assistência Técnica 24h</li>
-                <li><i class="fas fa-check"></i> Canais TV Aberta</li>
-                <li><i class="fas fa-check"></i> Filmes e Séries</li>
-              </ul>
-              <a href="checkout.html?plan=500" class="card-btn">Contratar</a>
-            </article>
-
-            <article class="price-card" data-plan="700">
-              <div class="card-top">
-                <i class="fas fa-signal"></i>
-                <h3>700 Mega</h3>
-              </div>
-              <div class="card-body">
-                <div class="speed-label">700 Mega</div>
-                <div class="price-line">
-                  <span class="currency">R$</span>
-                  <span class="value">119,99</span>
-                  <span class="period">/mês</span>
-                </div>
-              </div>
-              <ul class="plan-features">
-                <li><i class="fas fa-check"></i> WiFi Plus</li>
-                <li><i class="fas fa-check"></i> Assistência Técnica 24h</li>
-                <li><i class="fas fa-check"></i> Canais TV Aberta</li>
-                <li><i class="fas fa-check"></i> Filmes e Séries</li>
-              </ul>
-              <a href="checkout.html?plan=700" class="card-btn">Contratar</a>
-            </article>
-
-            <article class="price-card" data-plan="1000">
-              <div class="card-top">
-                <i class="fas fa-rocket"></i>
-                <h3>1 Giga</h3>
-              </div>
-              <div class="card-body">
-                <div class="speed-label">1 Giga</div>
-                <div class="price-line">
-                  <span class="currency">R$</span>
-                  <span class="value">129,99</span>
-                  <span class="period">/mês</span>
-                </div>
-              </div>
-              <ul class="plan-features">
-                <li><i class="fas fa-check"></i> WiFi Plus</li>
-                <li><i class="fas fa-check"></i> Assistência Técnica 24h</li>
-                <li><i class="fas fa-check"></i> Canais TV Aberta</li>
-                <li><i class="fas fa-check"></i> Filmes e Séries</li>
-              </ul>
-              <a href="checkout.html?plan=1000" class="card-btn">Contratar</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="about" id="quem-somos">
-        <div class="container about-wrap">
-          <div class="about-copy">
-            <h2>Quem somos</h2>
-            <p>
-              Somos uma empresa especializada em telecomunicações e soluções integradas para
-              clientes residenciais e corporativos.
-            </p>
-            <p>
-              Garantimos acesso à internet com máxima rapidez, estabilidade e segurança.
-              Complementando nossos serviços, oferecemos um ecossistema diversificado de conteúdo
-              digital, unindo informação e diversão em um só lugar.
-            </p>
-            <div class="about-points">
-              <span>Conexão rápida</span>
-              <span>Suporte dedicado</span>
-              <span>Estabilidade</span>
-              <span>Segurança</span>
-            </div>
-          </div>
-          <div class="about-visual">
-            <div class="about-box">
-              <i class="fas fa-signal"></i>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact-section" id="contato">
-        <div class="container contact-wrap">
-          <div class="contact-card contact-info">
-            <h3>Contato</h3>
-            <div class="contact-list">
-              <div class="contact-item">
-                <i class="fas fa-phone-alt"></i>
-                <span>(32) 3212-3259</span>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>velozesjf@gmail.com</span>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Av. dos Andradas, 340 - Morro da Glória, Juiz de Fora - MG, 36036-000</span>
-              </div>
-              <div class="contact-item">
-                <i class="fab fa-instagram"></i>
-                <span>@velozesinternet</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-card contact-cta">
-            <h3>Atendimento rápido</h3>
-            <p>Fale com nossa equipe e saiba qual plano é ideal para sua casa ou empresa.</p>
-            <a href="https://wa.me/553232123259" target="_blank" rel="noreferrer" class="whatsapp-btn">
-              <i class="fab fa-whatsapp"></i> Falar no WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <div class="brand-mark small">
-            <span class="brand-dot"></span>
-          </div>
-          <div class="brand-text">
-            <span class="brand-main">Velozes</span>
-            <span class="brand-sub">Internet</span>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <a href="#inicio">Home</a>
-          <a href="#planos">Planos</a>
-          <a href="#quem-somos">Quem Somos</a>
-          <a href="#contato">Contato</a>
-        </div>
-
-        <div class="footer-copy">
-          © 2024 Velozes Internet. Todos os direitos reservados.
-        </div>
-      </div>
-    </footer>
-
-    <a href="https://wa.me/553232123259" class="float-whatsapp" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-  </div>
-
-  <script src="script.js"></script>
+    </div>
+  </main>
+  <script>
+    const plans={500:{name:'500 Mega',speed:'500 Mbps',price:99.99},700:{name:'700 Mega',speed:'700 Mbps',price:119.99},1000:{name:'1 Giga',speed:'1 Gbps',price:129.99}};const params=new URLSearchParams(window.location.search);const planKey=params.get('plan')||'500';const selectedPlan=plans[planKey]||plans[500];document.getElementById('plan-name').textContent=selectedPlan.name;document.getElementById('plan-speed').textContent=selectedPlan.speed;document.getElementById('plan-price').textContent=`R$ ${selectedPlan.price.toFixed(2).replace('.',',')}`;document.getElementById('plan-total').textContent=`R$ ${selectedPlan.price.toFixed(2).replace('.',',')}`;
+  </script>
 </body>
 </html>
