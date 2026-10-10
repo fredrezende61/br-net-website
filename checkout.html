@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - BR Net</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-wifi"></i>
+                    <span>BR Net</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Voltar</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-wrapper">
+                <!-- Plan Summary -->
+                <div class="plan-summary">
+                    <h2>Resumo do Plano</h2>
+                    <div class="summary-card">
+                        <div class="summary-item">
+                            <span class="label">Plano Selecionado:</span>
+                            <span class="value" id="plan-name">Plano Premium</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Velocidade:</span>
+                            <span class="value" id="plan-speed">100 Mbps</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Valor Mensal:</span>
+                            <span class="value" id="plan-price">R$ 79,90</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span class="label">Total a Pagar:</span>
+                            <span class="total-value" id="total-price">R$ 79,90</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="payment-form-container">
+                    <h2>Informações de Pagamento</h2>
+                    <form id="payment-form">
+                        <!-- Personal Info -->
+                        <div class="form-section">
+                            <h3>Dados Pessoais</h3>
+                            <div class="form-group">
+                                <label for="name">Nome Completo</label>
+                                <input type="text" id="name" name="name" required placeholder="João Silva">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required placeholder="joao@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefone</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(11) 91234-5678">
+                            </div>
+                        </div>
+
+                        <!-- Address Info -->
+                        <div class="form-section">
+                            <h3>Endereço</h3>
+                            <div class="form-group">
+                                <label for="address">Rua/Avenida</label>
+                                <input type="text" id="address" name="address" required placeholder="Rua das Flores">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="number">Número</label>
+                                    <input type="text" id="number" name="number" required placeholder="123">
+                                </div>
+                                <div class="form-group">
+                                    <label for="complement">Complemento</label>
+                                    <input type="text" id="complement" name="complement" placeholder="Apto 456">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Cidade</label>
+                                    <input type="text" id="city" name="city" required placeholder="São Paulo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">Estado</label>
+                                    <input type="text" id="state" name="state" required placeholder="SP">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cep">CEP</label>
+                                    <input type="text" id="cep" name="cep" required placeholder="01234-567">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Info -->
+                        <div class="form-section">
+                            <h3>Cartão de Crédito</h3>
+                            <div class="form-group">
+                                <label for="card-element">Dados do Cartão</label>
+                                <div id="card-element" class="stripe-element"></div>
+                                <div id="card-errors" class="error-message" role="alert"></div>
+                            </div>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">Concordo com os <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a></label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submit-button" class="submit-btn">
+                            <span id="button-text">Confirmar Pagamento</span>
+                            <i class="fas fa-lock"></i>
+                        </button>
+                        <p class="security-note"><i class="fas fa-shield-alt"></i> Sua transação é segura e protegida</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BR Net</h3>
+                    <p>Seu provedor de internet de confiança</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Fale Conosco</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termos de Serviço</a></li>
+                        <li><a href="#">Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BR Net - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get plan from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const planParam = urlParams.get('plan') || 'premium';
+
+        const plans = {
+            basic: { name: 'Plano Básico', speed: '25 Mbps', price: 49.90 },
+            premium: { name: 'Plano Premium', speed: '100 Mbps', price: 79.90 },
+            ultra: { name: 'Plano Ultra', speed: '250 Mbps', price: 99.90 }
+        };
+
+        const selectedPlan = plans[planParam] || plans.premium;
+        
+        document.getElementById('plan-name').textContent = selectedPlan.name;
+        document.getElementById('plan-speed').textContent = selectedPlan.speed;
+        document.getElementById('plan-price').textContent = `R$ ${selectedPlan.price.toFixed(2)}`;
+        document.getElementById('total-price').textContent = `R$ ${selectedPlan.price.toFixed(2)}`;
+
+        // Initialize Stripe
+        const stripe = Stripe('pk_test_51234567890abcdefghijklmnopqrstuvwxyz'); // Replace with your key
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#424770',
+                    '::placeholder': {
+                        color: '#9CA3AF',
+                    },
+                },
+                invalid: {
+                    color: '#EF4444',
+                },
+            }
+        });
+        cardElement.mount('#card-element');
+
+        // Handle card errors
+        cardElement.on('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const submitButton = document.getElementById('submit-button');
+            const buttonText = document.getElementById('button-text');
+            
+            submitButton.disabled = true;
+            buttonText.textContent = 'Processando...';
+
+            // Create token
+            const {token} = await stripe.createToken(cardElement, {
+                name: document.getElementById('name').value,
+                address_line1: document.getElementById('address').value,
+                address_city: document.getElementById('city').value,
+                address_state: document.getElementById('state').value,
+                address_zip: document.getElementById('cep').value,
+            });
+
+            if (token) {
+                // Here you would send the token to your backend for processing
+                console.log('Token created:', token.id);
+                alert('Pagamento simulado com sucesso! Obrigado por escolher BR Net.');
+                // In production, send token to your server for processing
+                form.reset();
+                submitButton.disabled = false;
+                buttonText.textContent = 'Confirmar Pagamento';
+            } else {
+                document.getElementById('card-errors').textContent = 'Erro ao processar o pagamento';
+                submitButton.disabled = false;
+                buttonText.textContent = 'Confirmar Pagamento';
+            }
+        });
+    </script>
+</body>
+</html>
